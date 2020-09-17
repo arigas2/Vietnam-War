@@ -4,9 +4,11 @@ author: "Ethan Brady and Andrew Rigas"
 date: "5/17/2018"
 output:
   html_document:
-    toc: true
+    toc: yes
     toc_float:
-      collapsed: true
+      collapsed: yes
+  pdf_document:
+    toc: yes
 ---
 
 ```{r setup, results = "hide", message = FALSE, warning = FALSE, echo = FALSE}
@@ -19,7 +21,7 @@ library(knitr)
 library(kableExtra)
 library(evaluate)
 library(gridExtra)
-#no need to set working directory?
+
 vietnam <- fread("thor_data_vietnam.csv")
 vietnam$MSNDATE <-
   vietnam$MSNDATE %>%
@@ -46,13 +48,13 @@ vietnam.bob <-
   filter(NUMWEAPONSDELIVERED > 0)
 ```
 
-![NW of Saigon, March 1965. Horst Faas/AP](helicopters.jpg)
+![NW of Saigon, March 1965. Horst Faas/AP](photos/helicopters.jpg)
 
 # Introduction
 
 This report uses data that details the aerial bombings during the Vietnam War. The data comes from [Theater History of Operations](https://data.world/datamil/vietnam-war-thor-data) (THOR), which is a database of bombings from World War I through Vietnam begun by the United States Air Force in 2012. Lt. Col. Jenns Robertson, the director of the project, examined thousands of handwritten and typed mission reports to create a comprehensive source of bombing history around the globe. Government agencies have been using the database to find unexploded ordnance in places like Laos and Cambodia, but it also provides a wealth of information for historians of the Vietnam War.^[Bryan Bender, "Bomb database useful for past, present wars," *The Boston Globe,* July 30, 2012, https://www.bostonglobe.com/news/nation/2012/07/29/century-data-and-destruction-chronicled-air-force-officer/5m2HK2CP9UcwwJzMhtdQOO/story.html.]
 
-According to the dataset's dictionary, each observation is defined as an “instance of a unique weapon type or engagement of a unique target.” Meaning if plane A droped two 500-pound bombs on target one, then one 500-pound bomb on target two, that is listed as two observations. If plane A dropped one 250-pound bomb on target one, and then two more 250-pound bombs on target one, those three bombs are listed as part of the same record—since they were the same type of bomb dropped on the same target. The dataset includes information about the country who dropped the bomb, when it was dropped, who the target was, and what operation it was a part of.
+According to the dataset's dictionary, each observation is defined as an “instance of a unique weapon type or engagement of a unique target.” Meaning if plane A dropped two 500-pound bombs on target one, then one 500-pound bomb on target two, that is listed as two observations. If plane A dropped one 250-pound bomb on target one, and then two more 250-pound bombs on target one, those three bombs are listed as part of the same record—since they were the same type of bomb dropped on the same target. The dataset includes information about the country who dropped the bomb, when it was dropped, who the target was, and what operation it was a part of.
 
 The research questions that this project intends to answer are as follows:
 
@@ -205,7 +207,7 @@ vietnam.bob %>%
                                "S. VIETNAM")) +
   labs(title = "Daily bombings by country",
        x = "Date",
-       y = "Instances")
+       y = "Proportion of Strikes")
 ```
 
 The only significant change in the proportion of countries conducting bombing seems to have begun in 1973, when the proportion of bombings by the U.S. drastically decreased and South Vietnam took over with three-fourths of all bombing. This shift corresponds to the official end of U.S. involvement on August 15, 1973, when Congress voted to force Nixon to cease all military operations in Vietnam—including air bombings. It was the product of pervasive skepticism over the president's Vietnam policy.^[Lawrence, *The Vietnam War,* 164.] Interestingly, in 1970, Congress had already forced the withdrawal of all U.S. ground troops by 1972, reflecting a rising tide of public opinion against the war. But as these data show, between 1970 and 1972, as the U.S. was decreasing its ground commitment, it still remained as the primary bombing culprit in Southeast Asia.
@@ -222,7 +224,7 @@ Because the United States dropped the majority of bombs until 1974, we decided t
 > *"The loss of Vietnam [would produce] a mean and destructive debate that would shatter my presidency, kill my administration, and damage our democracy." —Lyndon B. Johnson, July 1965.^[Herring, *America's Longest War*, 143.]*
 
 ```{r, echo = FALSE}
-knitr::include_graphics("1965.png")
+knitr::include_graphics("maps/1965.png")
 ```
 
 In March 1965, President Lyndon B. Johnson initiated the United States’ first bombing campaign of Vietnam, Operation Rolling Thunder, an operation that bombed the North Vietnamese and the Viet Cong in the south, and provided the pretext for introducing the first American ground troops.
@@ -235,7 +237,7 @@ At first he merely increased the number of advisers in Vietnam. But by 1965, as 
 > *"They had to be pounded with artillery and bombs and eventually brought to battle on the ground if they were not forever to remain a threat." —Gen. William Westmoreland.^[Herring, *America's Longest War*, 151.]*
 
 ```{r, echo = FALSE}
-knitr::include_graphics("1966.png")
+knitr::include_graphics("maps/1966.png")
 ```
 
 While Operation Rolling Thunder was concentrated on military bases and supply depots in the southern part of the country, from early 1966 on the U.S. increasingly directed air strikes against the North Vietnamese industrial and transportation systems.
@@ -247,7 +249,7 @@ The Americans relentlessly bombed narrow routes along the Ho Chi Minh trail, a c
 
 
 ```{r, echo = FALSE}
-knitr::include_graphics("1967.png")
+knitr::include_graphics("maps/1967.png")
 ```
 
 The air war gradually grew to massive proportions. By 1967, relying on saturated, indiscriminate air raids, the U.S. designated entire areas of South Vietnam as "free fire zones," which could be decimated without regard for the inhabitants.^[Herring, *America's Longest War*, 153.] 
@@ -259,7 +261,7 @@ President Johnson  disagreed with the Joint Chief's proposal for a knock-out blo
 
 
 ```{r, echo = FALSE}
-knitr::include_graphics("1968.png")
+knitr::include_graphics("maps/1968.png")
 ```
 
 In retaliation to the Tet Offensive, the U.S.  expanded the air war in the South, attacking infiltration routes and suspected enemy base camps.
@@ -272,7 +274,7 @@ The U.S. also engaged in a 24-day battle for the city of Hue, close to the borde
 > *"I want the North Vietnamese to believe I’ve reached the point where I might do anything to stop the war." —Richard Nixon.^[Schmitz, *Richard Nixon and the Vietnam War*, 69.]*
 
 ```{r, echo = FALSE}
-knitr::include_graphics("1969.png")
+knitr::include_graphics("maps/1969.png")
 ```
 
 Part of President Nixon’s strategy in Vietnam was a peaceful facade that included extending a bombing halt on North Vietnam, but he continued the bombing in South Vietnam and attacked Viet Cong force in Cambodia as a part of his “madman strategy.”
@@ -285,7 +287,7 @@ Nixon initiated covert bombings of Cambodia and Laos, which housed Viet Cong san
 > *"Even without a reason, we ought to go ahead and crack them pretty hard in the North [Cambodia].... The necessity for the North Vietnamese to know that there's still a lot of snap in the old boys is very important. And I don't know any other way to do it." —Richard Nixon, April 1969.^[Schmitz, *Richard Nixon and the Vietnam War*, 51-52.]*
 
 ```{r, echo = FALSE}
-knitr::include_graphics("1970.png")
+knitr::include_graphics("maps/1970.png")
 ```
 
 The U.S. increased secret bombings in Cambodia and Laos, as seen as this map. But this campaign was unknown to the American public until the release of the Pentagon Papers in 1971.
@@ -296,7 +298,7 @@ Nixon’s moves did not force Vietnam to give in, and public demonstrations agai
 >*"In revealing the workings of government that led to the Vietnam war, the newspapers nobly did precisely that which the Founders hoped and trusted they would do." —Supreme Court Justice Hugo Black, referring to the Pentagon Papers.*
 
 ```{r, echo = FALSE}
-knitr::include_graphics("1971.png")
+knitr::include_graphics("maps/1971.png")
 ```
 
 Following several military failures and increasing domestic hostility towards the war, Nixon was forced to rein in bombings in Vietnam.
@@ -307,7 +309,7 @@ In the middle of 1971, the New York Times started publishing parts of the Pentag
 > *"Peace is at hand." —Henry Kissinger, October 26, 1972.^[Lawrence, *The Vietnam War*, 158.]*
 
 ```{r, echo = FALSE}
-knitr::include_graphics("1972.png")
+knitr::include_graphics("maps/1972.png")
 ```
 
 Just as the war was supposedly winding down, the U.S. initiated a string of bombings in North Vietnam, near Hanoi, the capital.
@@ -324,7 +326,7 @@ Instead, a month after Nixon's landslide election on November 7, the president l
 > *"We today have concluded an agreement to end the war and bring peace with honor in Vietnam and in Southeast Asia." —Richard Nixon, January 23, 1973.^[Schmitz, *Richard Nixon and the Vietnam War*, 143.]*
 
 ```{r, echo = FALSE}
-knitr::include_graphics("1973.png")
+knitr::include_graphics("maps/1973.png")
 ```
 
 Within 60 days of Nixon announcing an end to the war, all American forces would be withdrawn and bombing stopped. But there were still last vestiges of bombing by the U.S.
@@ -336,7 +338,7 @@ With Nixon declaring his intention to secure "peace with honor" beginning as ear
 
 The Boeing B-52 Stratofortress is a long-range, subsonic, jet-powered strategic bomber introduced to the USAF in 1955. The bomber can carry up to 70,000 pounds of weapons, and can travel 8,800 miles without refueling.
 
-![B-52 dropping payload during the Christmas Bombing, December 1972. USAF.](b52.jpg)
+![B-52 dropping payload during the Christmas Bombing, December 1972. USAF.](photos/b52.jpg)
 
 ```{r, echo = FALSE, warning = FALSE, fig.align = "center"}
 vietnam.bob %>%
@@ -349,7 +351,7 @@ vietnam.bob %>%
   theme(legend.position = "bottom") +
   labs(title = "Use of B-52 aircraft by USAF",
        x = "Date",
-       y = "Instances")
+       y = "Proportion")
 ```
 
 The data show that the U.S. Air Force drastically increased its usage of B-52 aircraft beginning in 1972. And in December of that year, USAF directed most of its B-52s to bomb Hanoi and Haiphong, the capital and second-largest city of the North Vietnam. This was known as the "Christmas bombings," or Operation Linebacker II.
@@ -443,7 +445,7 @@ This model demonstrates that the bombing of North Vietnam, specifically Hanoi, t
 # Conclusion
 > *"The bastards have never been bombed like they're going to be bombed this time." —Richard Nixon, April 4, 1972.^["Nixon on Bombing Recorded in Tape," *The New York Times*, June 30, 1974, https://www.nytimes.com/1974/06/30/archives/nixon-on-bombing-recorded-in-tape-reason-for-moving.html.]*
 
-![Hanoi's Kham Thien Street, devastated by the Christmas Bombings, December 1972.](xmas.jpg)
+![Hanoi's Kham Thien Street, devastated by the Christmas Bombings, December 1972.](photos/xmas.jpg)
 
 The Christmas bombing devastated Hanoi and Haiphong, destroying factories, power plants, residential districts, and transportation stations, while killing as many as 2,200 civilians. Nixon agreed to suspend the bombing if North Vietnam agreed to resume peace talks; they did. But the agreement reached barely met Nixon’s minimal terms for “peace with honor.” Under the terms, the U.S. could exit the war, but North Vietnamese troops could remain in the south. The ultimate question that drew the United States into the war in the first place—the political future of South Vietnam—was left undecided. Ultimately, the future Americans favored fell with Saigon in 1975.^[Herring *America’s Longest War*, 249-50.]
 
