@@ -7,8 +7,6 @@ library(lubridate)
 library(stringi)
 
 
-setwd("~/Documents/Documents/College/Spring 2018/Data Science/Vietnam War/datamil-vietnam-war-thor-data/original")
-
 vietnam <- fread("thor_data_vietnam.csv")
 vietnam$MSNDATE <-
   vietnam$MSNDATE %>%
@@ -32,8 +30,8 @@ vietnam.bob <-
   vietnam %>%
   filter(NUMWEAPONSDELIVERED > 0)
 
-
-register_google(key = "AIzaSyCzEGHzEAkVx6YwDH6rsg2hMAreuLWepPQ")
+# to access maps, obtain an API key to use in register_google(key = "")
+register_google(key = "")
 map1 <-
   get_map(location = "Vietnam",
           source = "google",
