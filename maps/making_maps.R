@@ -30,7 +30,7 @@ vietnam.bob <-
   vietnam %>%
   filter(NUMWEAPONSDELIVERED > 0)
 
-# to access maps, obtain an API key to use in register_google(key = "")
+# Obtain an API key to use in register_google(key = ""). This will give access to Google Maps.
 register_google(key = "")
 map1 <-
   get_map(location = "Vietnam",
